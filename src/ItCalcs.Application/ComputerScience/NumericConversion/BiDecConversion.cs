@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ItCalcs.Application.ComputerScience.NumericConversion;
@@ -33,7 +34,33 @@ public partial class BiDecConversion : INumericConversion
 
     public string ReverseConvert(string numericValue)
     {
-        throw new NotImplementedException();
+        long value = 0;
+        if (!long.TryParse(numericValue, out value))
+        {
+            throw new ArgumentException("Decimal numeric value should contain only digits!", nameof(numericValue));
+        }
+
+        var highestBit = (long)Math.Log2(value);
+        var multipliedBit = (long)Math.Pow(2, highestBit);
+        
+        var binaryValueSb = new StringBuilder();
+
+        while (value > 0 || multipliedBit >= 1)
+        {
+            if (value - multipliedBit >= 0)
+            {
+                binaryValueSb.Append('1');
+                value -= multipliedBit;
+            }
+            else
+            {
+                binaryValueSb.Append('0');
+            }
+            
+            multipliedBit /= 2;
+        }
+
+        return binaryValueSb.ToString();
     }
 
     [GeneratedRegex(@"^[01\s]+$")]
