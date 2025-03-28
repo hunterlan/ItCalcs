@@ -36,6 +36,6 @@ public partial class BiDecConversion : INumericConversion
         throw new NotImplementedException();
     }
 
-    [GeneratedRegex(@"([0-1]{1,}\s{0,}){1,}")]
+    [GeneratedRegex(@"^[01\s]+$")]
     private static partial Regex MyRegex();
 }

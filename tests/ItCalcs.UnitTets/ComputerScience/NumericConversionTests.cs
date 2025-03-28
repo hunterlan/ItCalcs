@@ -20,4 +20,10 @@ public class NumericConversionTests
         
         Assert.Equal(expectedValues, actualValues);
     }
+
+    [Fact]
+    public void Binary_To_Double_Conversion_Exception_Test()
+    {
+        Assert.Throws<ArgumentException>(() => NumericConversionFactory.Create("bidec").Convert("648292163784217gfbsabhjbfashjb"));
+    }
 }
