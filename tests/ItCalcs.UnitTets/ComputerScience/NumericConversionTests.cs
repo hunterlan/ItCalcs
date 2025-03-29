@@ -1,5 +1,4 @@
 using ItCalcs.Application.ComputerScience.Factories;
-using ItCalcs.Application.ComputerScience.NumericConversion;
 
 namespace ItCalcs.UnitTets.ComputerScience;
 
@@ -41,5 +40,11 @@ public class NumericConversionTests
         ];
         
         Assert.Equal(expectedValues, actualValues);
+    }
+
+    [Fact]
+    public void Decimal_To_Binary_Argument_Exception_Test()
+    {
+        Assert.Throws<ArgumentException>(() => NumericConversionFactory.Create("bidec").ReverseConvert("a123c"));
     }
 }

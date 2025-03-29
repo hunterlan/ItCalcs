@@ -3,8 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace ItCalcs.Application.ComputerScience.NumericConversion;
 
+/// <inheritdoc/>
 public partial class BiDecConversion : INumericConversion
 {
+    /// <exception cref="ArgumentException">Wrong binary numeric format</exception>
+    /// <inheritdoc/>
     public string Convert(string numericValue)
     {
         var regex = MyRegex();
@@ -32,6 +35,8 @@ public partial class BiDecConversion : INumericConversion
         return decimialValue.ToString();
     }
 
+    /// <exception cref="ArgumentException">Wrong decimal numeric format</exception>
+    /// <inheritdoc/>
     public string ReverseConvert(string numericValue)
     {
         long value = 0;
