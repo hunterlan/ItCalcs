@@ -1,8 +1,8 @@
 using ItCalcs.Application.ComputerScience.Factories;
 
-namespace ItCalcs.UnitTets.ComputerScience;
+namespace ItCalcs.UnitTets.ComputerScience.ConversionTests;
 
-public class NumericConversionTests
+public class BiDecNumericConversionTests
 {
     [Fact]
     public void Binary_To_Decimal_Conversion_Test()

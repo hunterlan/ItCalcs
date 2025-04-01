@@ -19,7 +19,7 @@ public class NumericConversionFactory
         return type switch
         {
             "bidec" => new BiDecConversion(),
-            "dechex" => throw new NotImplementedException(),
+            "dechex" => new DecHexConversion(),
             "hexbi" => throw new NotImplementedException(),
             _ => throw new ArgumentException($"Wrong value", nameof(type))
         };
