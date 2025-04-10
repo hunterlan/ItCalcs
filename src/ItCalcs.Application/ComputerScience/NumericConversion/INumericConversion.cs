@@ -15,7 +15,7 @@ public interface INumericConversion
     /// <summary>
     /// Converts value from second numeric system to first numeric system.
     /// </summary>
-    /// <param name="numericValue">Value of second numeric system</param>
+    /// <param name="hexValue">Value of second numeric system</param>
     /// <returns>Result of conversion to first numeric system</returns>
-    string ReverseConvert(string numericValue);
+    string ReverseConvert(string hexValue);
 }

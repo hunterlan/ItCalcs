@@ -6,8 +6,7 @@ public class DecHexConversion : INumericConversion
 {
     public string Convert(string numericValue)
     {
-        long value = 0;
-        if (!long.TryParse(numericValue, out value))
+        if (!long.TryParse(numericValue, out var value))
         {
             throw new ArgumentException("Invalid numeric value", nameof(numericValue));
         }
@@ -24,9 +23,31 @@ public class DecHexConversion : INumericConversion
         return hexSb.ToString();
     }
 
-    public string ReverseConvert(string numericValue)
+    public string ReverseConvert(string hexValue)
     {
-        return "";
+        hexValue = hexValue.ToUpperInvariant();
+        long decimalValue = 0;
+        
+        for (var index = 0; index < hexValue.Length; index++)
+        {
+            var symbol = hexValue[index];
+            
+            if (long.TryParse(symbol.ToString(), out var numericValue))
+            {
+                decimalValue += numericValue * (long)Math.Pow(16, hexValue.Length - 1 - index);
+            }
+            else
+            {
+                var transformedNumericValue = GetNumber(symbol);
+                if (transformedNumericValue is null)
+                {
+                    throw new ArgumentException("Invalid hexadecimal value", nameof(hexValue));
+                }
+                decimalValue += transformedNumericValue.Value * (long)Math.Pow(16, hexValue.Length - 1 - index);
+            }
+        }
+
+        return decimalValue.ToString();
     }
 
     private string GetLetter(long reminder)
@@ -48,17 +69,17 @@ public class DecHexConversion : INumericConversion
         };
     }
 
-    private long GetNumber(string letter)
+    private long? GetNumber(char letter)
     {
         return letter switch
         {
-            "A" => 10,
-            "B" => 11,
-            "C" => 12,
-            "D" => 13,
-            "E" => 14,
-            "F" => 15,
-            _ => throw new ArgumentOutOfRangeException(nameof(letter))
+            'A' => 10,
+            'B' => 11,
+            'C' => 12,
+            'D' => 13,
+            'E' => 14,
+            'F' => 15,
+            _ => null
         };
     }
 }

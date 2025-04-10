@@ -19,4 +19,37 @@ public class DecHexNumericConversionTests
         
         Assert.Equal(expectedValues, actualValues);
     }
+
+    [Fact]
+    public void Decimal_Validation_Test()
+    {
+        var hexdecConversion = NumericConversionFactory.Create("dechex");
+        
+        Assert.Throws<ArgumentException>(() => hexdecConversion.Convert("@hfskjag&nvbsjkacibn"));
+    }
+
+    [Fact]
+    public void Hexadecimal_to_Decimal_Conversion_Test()
+    {
+        var conversion = NumericConversionFactory.Create("dechex");
+
+        List<string> expectedValue = ["14971", "32572", "53257", "62745"];
+        List<string> actualValues =
+        [
+            conversion.ReverseConvert("3A7B"),
+            conversion.ReverseConvert("7F3C"),
+            conversion.ReverseConvert("d009"),
+            conversion.ReverseConvert("F519"),
+        ];
+        
+        Assert.Equal(expectedValue, actualValues);
+    }
+
+    [Fact]
+    public void Hexadecimal_Validation_Test()
+    {
+        var conversion = NumericConversionFactory.Create("dechex");
+        
+        Assert.Throws<ArgumentException>(() => conversion.Convert("3Z1AC"));
+    }
 }

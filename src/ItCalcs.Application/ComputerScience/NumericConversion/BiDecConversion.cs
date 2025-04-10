@@ -37,12 +37,12 @@ public partial class BiDecConversion : INumericConversion
 
     /// <exception cref="ArgumentException">Wrong decimal numeric format</exception>
     /// <inheritdoc/>
-    public string ReverseConvert(string numericValue)
+    public string ReverseConvert(string hexValue)
     {
         long value = 0;
-        if (!long.TryParse(numericValue, out value))
+        if (!long.TryParse(hexValue, out value))
         {
-            throw new ArgumentException("Decimal numeric value should contain only digits!", nameof(numericValue));
+            throw new ArgumentException("Decimal numeric value should contain only digits!", nameof(hexValue));
         }
 
         var highestBit = (long)Math.Log2(value);
